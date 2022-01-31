@@ -1,0 +1,121 @@
+1)  Let R=ABCDEGHK and F= {ABK→C, A→DG, B→K, K→ADH, H→GE} . 
+Is it in BCNF?  Prove your answer.
+R=ABCDEGHK is not in BCNF. This is because not all parts of the function fulfill the attributes needed. ABK->C and A->DG are not in BCNF while B->K is in BCNF. The last two are also not in BCNF which leads to my conclusion.
+
+
+
+2)  Let R(ABCDEFG) be a relation and F={A -> C, A-> D,  B->F, E->F, F->G}
+
+a. Show example of lossless join decomposition of R into three tables R1, R2 
+and R3 and demonstrate that this decomposition is lossless using chase 
+algorithm
+R1(A-C,A-D,E-F) R2(B-F,F-G,E-F) R3(E-F)
+Since all the properties are met, it is lossless decomposition.
+
+b. Find one key for this scheme and prove that it is a key using closure 
+algorithm and definition of a key.
+The definition of a key is a single column or attribute (or group of columns) that can uniquely identify rows.
+A key for this scheme is ABE since
+A: A-C-D
+B: B-F
+E: E-F-G
+Which makes A B E the key for this.
+
+3)  Consider R = ABCDEG, with the set of dependencies F={AB → D, AB → C, 
+AC → E, B → D, BE → A, E → G}. Suppose we have decomposed it into 
+relations with set of attributes R1={ABD}, R2={ACE}, R3={ADEG}. Show using 
+chase algorithm if this decomposition has lossless join property.
+      A   B   C   D   E  G
+ 
+ 1    A   B   B1  D   E1 G1
+
+ 2    A   B2  C   D2  E  G2
+
+ 3    A   B3  B3  D   E  G
+The E relations agree, which means we must see if the G values agree.
+      A   B   C   D   E  G
+ 
+ 1    A   B   C1  D   E1 G1
+
+ 2    A   B2  C   D2  E  G
+
+ 3    A   B3  C3  D   E  G
+None of these fulfill all the properties of R. After using the chase algorithm, I have found that this decomposition does not have lossless join property.
+
+
+
+4)  Let R(ABCD)  be a relation and  F={A->B, C->D, BC->A}.   Apply chase 
+algorithm to test if decomposition of R onto R1(AB), R2(AC), R3(BCD)  is 
+lossless.
+      A   B   C   D
+ 
+ 1    A   B   C1  D1
+
+ 2    A   B1  C   D1
+
+ 3    A3  B   C   D
+We change B1 to B
+      A   B   C   D
+ 
+ 1    A   B   C   D1
+
+ 2    A3  B   C   D1
+
+ 3    A3  B   C   D
+D1 to D
+      A   B   C   D
+ 
+ 1    A   B   C1  D1
+
+ 2    A   B   C   D
+
+ 3    A3  B   C   D
+A3 to A
+      A   B   C   D
+ 
+ 1    A   B   C1  D1
+
+ 2    A   B   C   D
+
+ 3    A   B   C   D
+As we can see, all the properties of R(ABCD) have been fulfilled which means the decomposition of R onto R1... is lossless.
+
+5) Let R(ABCDE)  be a relation and  F={AB, BCE, and ED A}. Decompose 
+R into BCNF using BCNF decomposition algorithm. Remember that you need to 
+compute projections of F to check if the decomposed tables are in BCNF.
+R(AB) R2(DCE) R3 (EDA)
+F1(A-B) F2(BC-E) F3(ED-A)
+
+                           R(ABCDE)
+                      /       |       \
+                  R1(AB)   R2(BCE)   R3(EDA)
+                    /         |         \
+                F1(A->B)   F2(BC->E)   F3(ED->A)
+
+6) Let  R(ABCDEFGH) be a relation and F= {ABE, CD, DE, FGA}. 
+Decompose R in BCNF using BCNF decomposition algorithm. Remember that 
+you need to compute projections of F to check if the decomposed tables are in 
+BCNF.   Using Chase algorithm demonstrate if the decomposition you obtained is 
+in fact lossless. 
+
+AB-E 
+R1(ABE)
+R2(ABCDFGH)
+
+C-D 
+R3(CD)
+R2(ABCDFGH) - (D)
+R4(ABCFHG)
+
+D-E 
+R4(ABCFHG) - (E)
+R4(ABCFGH)
+R5(DE)
+
+FG-A
+R4(ABCFGH) - (A)
+R7(BCFGH)
+R6(FGA)
+FG-A
+
+After creating the table, it is evident that properties of R(ABCDEFGH) have been fulfilled which means the decomposition is lossless.
